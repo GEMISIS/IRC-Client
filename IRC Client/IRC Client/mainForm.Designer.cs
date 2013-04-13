@@ -85,6 +85,7 @@
             // 
             this.joinChannelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.joinChannelButton.Enabled = false;
+            this.joinChannelButton.Font = new System.Drawing.Font("DejaVu Sans Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.joinChannelButton.Location = new System.Drawing.Point(7, 403);
             this.joinChannelButton.Name = "joinChannelButton";
             this.joinChannelButton.Size = new System.Drawing.Size(126, 37);
@@ -97,6 +98,7 @@
             // 
             this.leaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.leaveButton.Enabled = false;
+            this.leaveButton.Font = new System.Drawing.Font("DejaVu Sans Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.leaveButton.Location = new System.Drawing.Point(139, 403);
             this.leaveButton.Name = "leaveButton";
             this.leaveButton.Size = new System.Drawing.Size(126, 37);

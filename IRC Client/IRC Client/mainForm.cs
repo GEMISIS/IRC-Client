@@ -175,7 +175,14 @@ namespace IRC_Client
             foreach (string cmd in commands)
             {
                 string command = cmd;
-                if (command[0] == ':')
+                if (command[0] != ':')
+                {
+                    string actualCommand = cmd.Split(new char[] { ' ' })[0];
+                    string[] parameters = cmd.Substring(actualCommand.Length + 1).Split(new char[] { ' ' });
+                    doCommand(actualCommand, parameters);
+                    channelTabs.Refresh();
+                }
+                else
                 {
                     command = command.Substring(1);
                     // Create a temporary channel name from the channel in the command.
@@ -385,7 +392,6 @@ namespace IRC_Client
                     if (!user.Equals(userInfo.username))
                     {
                         currentTab.msgRecvBox.AppendText(user + ", ");
-                        currentTab.msgRecvBox.Text += user + ", ";
                     }
                 }
                 currentTab.msgRecvBox.Text = currentTab.msgRecvBox.Text.TrimEnd(new char[] { ',', ' ' }) + "\n";
@@ -663,25 +669,24 @@ namespace IRC_Client
         {
             Rectangle paddedBounds = e.Bounds;
             paddedBounds.Inflate(-2, -2);
+            Pen pen = new Pen(Color.Black);
+            e.Graphics.FillRectangle(new SolidBrush(this.BackColor), e.Bounds);
             switch (tabs[channelTabs.TabPages[e.Index].Text.ToLower()].notification)
             {
                 case Chat_Notifications.Message:
-                    e.Graphics.FillRectangle(new SolidBrush(Color.Yellow), e.Bounds);
-                    e.Graphics.DrawString(channelTabs.TabPages[e.Index].Text, this.Font, SystemBrushes.HighlightText, paddedBounds);
+                    pen = new Pen(Color.Blue);
                     break;
                 case Chat_Notifications.UserJoined:
-                    e.Graphics.FillRectangle(new SolidBrush(Color.Green), e.Bounds);
-                    e.Graphics.DrawString(channelTabs.TabPages[e.Index].Text, this.Font, SystemBrushes.HighlightText, paddedBounds);
+                    pen = new Pen(Color.Green);
                     break;
                 case Chat_Notifications.UserLeft:
-                    e.Graphics.FillRectangle(new SolidBrush(Color.Red), e.Bounds);
-                    e.Graphics.DrawString(channelTabs.TabPages[e.Index].Text, this.Font, SystemBrushes.HighlightText, paddedBounds);
+                    pen = new Pen(Color.Red);
                     break;
                 default:
-                    e.Graphics.FillRectangle(new SolidBrush(this.BackColor), e.Bounds);
-                    e.Graphics.DrawString(channelTabs.TabPages[e.Index].Text, this.Font, SystemBrushes.ActiveCaptionText, paddedBounds);
+                    pen = new Pen(Color.Black);
                     break;
             }
+            e.Graphics.DrawString(channelTabs.TabPages[e.Index].Text, this.Font, pen.Brush, paddedBounds);
         }
     }
 }
