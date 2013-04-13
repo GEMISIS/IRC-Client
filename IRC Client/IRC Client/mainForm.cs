@@ -99,6 +99,7 @@ namespace IRC_Client
             {
                 currentTab = tabs[channelTabs.TabPages[channelTabs.SelectedIndex].Text.ToLower()];
                 currentTab.notification = Chat_Notifications.None;
+                channelTabs.Refresh();
             }
             if (channelTabs.SelectedIndex > 0)
             {

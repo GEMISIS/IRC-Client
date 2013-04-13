@@ -125,9 +125,9 @@
             // 
             this.sendMsgButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.sendMsgButton.Font = new System.Drawing.Font("DejaVu Sans Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendMsgButton.Location = new System.Drawing.Point(657, 332);
+            this.sendMsgButton.Location = new System.Drawing.Point(654, 332);
             this.sendMsgButton.Name = "sendMsgButton";
-            this.sendMsgButton.Size = new System.Drawing.Size(61, 26);
+            this.sendMsgButton.Size = new System.Drawing.Size(61, 23);
             this.sendMsgButton.TabIndex = 1;
             this.sendMsgButton.Text = "Send";
             this.sendMsgButton.UseVisualStyleBackColor = true;

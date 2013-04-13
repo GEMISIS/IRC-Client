@@ -13,12 +13,13 @@ namespace IRC_Client
 {
     public partial class ImagePreview : Form
     {
+        private string imageLocation;
         public ImagePreview(string imageLocation)
         {
             InitializeComponent();
 
             WebClient client = new WebClient();
-            Stream stream = client.OpenRead(imageLocation);
+            Stream stream = client.OpenRead(this.imageLocation = imageLocation);
             this.pictureBox.Image = Image.FromStream(stream);
             stream.Flush();
             stream.Close();
@@ -29,6 +30,30 @@ namespace IRC_Client
             if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
+            }
+        }
+
+        private void pictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                this.Close();
+                System.Diagnostics.Process.Start(this.imageLocation);
+            }
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|JPG Files (*.jpg)|*.jpg";
+                DialogResult result = saveFileDialog.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    WebClient client = new WebClient();
+                    Stream stream = client.OpenRead(this.imageLocation);
+                    Image img = Image.FromStream(stream);
+                    stream.Flush();
+                    stream.Close();
+                    img.Save(saveFileDialog.FileName);
+                }
             }
         }
     }
