@@ -46,10 +46,11 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.channelTabs.Controls.Add(this.tabPage1);
             this.channelTabs.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.channelTabs.Location = new System.Drawing.Point(-1, -1);
+            this.channelTabs.Location = new System.Drawing.Point(12, 12);
             this.channelTabs.Name = "channelTabs";
+            this.channelTabs.Padding = new System.Drawing.Point(0, 0);
             this.channelTabs.SelectedIndex = 0;
-            this.channelTabs.Size = new System.Drawing.Size(746, 407);
+            this.channelTabs.Size = new System.Drawing.Size(720, 394);
             this.channelTabs.TabIndex = 6;
             this.channelTabs.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.channelTabs_DrawItem);
             // 
@@ -59,7 +60,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(738, 381);
+            this.tabPage1.Size = new System.Drawing.Size(712, 368);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Server";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -68,9 +69,9 @@
             // 
             this.commandBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.commandBox.Location = new System.Drawing.Point(153, 420);
+            this.commandBox.Location = new System.Drawing.Point(146, 416);
             this.commandBox.Name = "commandBox";
-            this.commandBox.Size = new System.Drawing.Size(579, 20);
+            this.commandBox.Size = new System.Drawing.Size(586, 20);
             this.commandBox.TabIndex = 13;
             // 
             // joinChannelButton
@@ -78,9 +79,9 @@
             this.joinChannelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.joinChannelButton.Enabled = false;
             this.joinChannelButton.Font = new System.Drawing.Font("DejaVu Sans Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.joinChannelButton.Location = new System.Drawing.Point(3, 412);
+            this.joinChannelButton.Location = new System.Drawing.Point(12, 408);
             this.joinChannelButton.Name = "joinChannelButton";
-            this.joinChannelButton.Size = new System.Drawing.Size(70, 37);
+            this.joinChannelButton.Size = new System.Drawing.Size(61, 37);
             this.joinChannelButton.TabIndex = 12;
             this.joinChannelButton.Text = "Join Channel";
             this.joinChannelButton.UseVisualStyleBackColor = true;
@@ -91,9 +92,9 @@
             this.leaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.leaveButton.Enabled = false;
             this.leaveButton.Font = new System.Drawing.Font("DejaVu Sans Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.leaveButton.Location = new System.Drawing.Point(79, 412);
+            this.leaveButton.Location = new System.Drawing.Point(79, 408);
             this.leaveButton.Name = "leaveButton";
-            this.leaveButton.Size = new System.Drawing.Size(68, 37);
+            this.leaveButton.Size = new System.Drawing.Size(61, 37);
             this.leaveButton.TabIndex = 14;
             this.leaveButton.Text = "Leave";
             this.leaveButton.UseVisualStyleBackColor = true;
@@ -104,7 +105,7 @@
             this.chatTab1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chatTab1.Location = new System.Drawing.Point(3, 3);
             this.chatTab1.Name = "chatTab1";
-            this.chatTab1.Size = new System.Drawing.Size(732, 375);
+            this.chatTab1.Size = new System.Drawing.Size(706, 362);
             this.chatTab1.TabIndex = 14;
             // 
             // chatTabStart

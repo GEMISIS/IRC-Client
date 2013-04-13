@@ -81,16 +81,22 @@ namespace IRC_Client
             manageData = new GetData(recievedData);
             // Setup the connection to the server's socket.
             mainSocket = connectToServer(userInfo.server, 6667);
-            currentTab.mainSocket = mainSocket;
-            // Set the new size to the size of the recieved buffer data.
-            data = new byte[BUFFER_LENGTH];
-            // Set the callback method for when data is recieved.
-            mainSocket.BeginReceive(data, 0, data.Length, SocketFlags.None, new AsyncCallback(dataRecieved), mainSocket);
+            if (mainSocket == null)
+            {
+                MessageBox.Show("Error connecting to server!");
+                this.Close();
+            }
+            else
+            {
+                currentTab.mainSocket = mainSocket;
+                // Set the new size to the size of the recieved buffer data.
+                data = new byte[BUFFER_LENGTH];
+                // Set the callback method for when data is recieved.
+                mainSocket.BeginReceive(data, 0, data.Length, SocketFlags.None, new AsyncCallback(dataRecieved), mainSocket);
 
-            // Set the form closing event.  This makes sure to disconnect all of the sockets.
-            this.FormClosing += new FormClosingEventHandler(mainForm_FormClosing);
-
-            channelTabs.DrawMode = TabDrawMode.OwnerDrawFixed;
+                // Set the form closing event.  This makes sure to disconnect all of the sockets.
+                this.FormClosing += new FormClosingEventHandler(mainForm_FormClosing);
+            }
         }
 
         void channelTabs_Selecting(object sender, TabControlCancelEventArgs e)
@@ -304,6 +310,7 @@ namespace IRC_Client
                 {
                     currentTab.ChannelTopic.Text += parameters[i];
                 }
+                currentTab.ChannelTopic.Text.TrimEnd(new char[] { ' ', '\n', '\r' });
             }
             else if (command.Equals("001") || command.Equals("002") ||
                 command.Equals("003") || command.Equals("004") ||
@@ -574,6 +581,7 @@ namespace IRC_Client
                     tabs.Add(userInfo.server.ToLower(), chatTab1);
                     currentTab = tabs[userInfo.server.ToLower()];
                     currentTab.ChannelTopic.Text = "Server: " + userInfo.server;
+                    currentTab.ChannelTopic.Text.TrimEnd(new char[] { ' ', '\n', '\r' });
                     currentTab.userInfo = userInfo;
                     
                     return socket;
@@ -687,7 +695,7 @@ namespace IRC_Client
                     pen = new Pen(Color.Black);
                     break;
             }
-            e.Graphics.DrawString(channelTabs.TabPages[e.Index].Text, this.Font, pen.Brush, paddedBounds);
+            e.Graphics.DrawString(" " + channelTabs.TabPages[e.Index].Text, this.Font, pen.Brush, paddedBounds);
         }
     }
 }
