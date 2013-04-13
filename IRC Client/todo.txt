@@ -1,0 +1,19 @@
+This is a todo list of things that I would like to add.
+Shout out to KonoM for some of these suggestions!
+
+- Tree view of servers, channels, messages.
+- Better code view, code highlighting.
+- Auto-reconnect.
+- Auto-changing from backup nick -> original nick on reconnect.
+- Append _'s or user choice of suffix to nickname upon reconnect if nick is taken.
+- Auto-ghost attempt at reconnect.
+- Add support for right-to-left text.
+
+Done - Add option for viewing image links within the client (please do not make this crash the client!).
+Done - Notifications (balloon + optionally sound)
+Done - Monospace fonts, also 1 up the size.
+Done - Automatically resizing user list.
+Done - Network overload icon.
+Done - Topic bar.
+Done - Support unicode characters/different character sets (I believe this is a protocol thing).
+Done - Separate nicks and messages nicely.
