@@ -87,11 +87,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatTab.cs">
+    <Compile Include="ChannelTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ChatTab.Designer.cs">
-      <DependentUpon>ChatTab.cs</DependentUpon>
+    <Compile Include="ChannelTab.Designer.cs">
+      <DependentUpon>ChannelTab.cs</DependentUpon>
     </Compile>
     <Compile Include="ImagePreview.cs">
       <SubType>Form</SubType>
@@ -125,8 +125,8 @@
     <Compile Include="UserInfoForm.Designer.cs">
       <DependentUpon>UserInfoForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ChatTab.resx">
-      <DependentUpon>ChatTab.cs</DependentUpon>
+    <EmbeddedResource Include="ChannelTab.resx">
+      <DependentUpon>ChannelTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImagePreview.resx">
       <DependentUpon>ImagePreview.cs</DependentUpon>

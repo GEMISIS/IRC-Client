@@ -38,7 +38,7 @@ namespace IRC_Client
             if (e.TabPageIndex > 0)
             {
                 // Set the current channel to the selected tab.
-                currentServer.currentChannel = (ChatTab)currentServer.channels[channelTabs.TabPages[e.TabPageIndex].Text.ToLower()];
+                currentServer.currentChannel = (ChannelTab)currentServer.channels[channelTabs.TabPages[e.TabPageIndex].Text.ToLower()];
                 // Set the notifactions to none.
                 currentServer.currentChannel.notification = Chat_Notifications.None;
                 // Refresh the tabs to force them to redraw.
@@ -80,7 +80,7 @@ namespace IRC_Client
             if (e.Index > 0)
             {
                 // Loop through the notifications for the tab.
-                switch (((ChatTab)currentServer.channels[channelTabs.TabPages[e.Index].Text.ToLower()]).notification)
+                switch (((ChannelTab)currentServer.channels[channelTabs.TabPages[e.Index].Text.ToLower()]).notification)
                 {
                     // Set the pen color to blue for a message.
                     case Chat_Notifications.Message:

@@ -13,6 +13,8 @@ namespace IRC_Client
         [STAThread]
         static void Main()
         {
+            // Checks if this is being compiled for mono. If so, make sure that the application
+            // remains compatible by not calling these methods.
 #if !MONO
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

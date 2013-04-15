@@ -9,12 +9,27 @@ namespace IRC_Client
     /// </summary>
     public partial class UserInfoForm : Form
     {
-        // The username and server for this IRC chat session.
-        public string username = "testUser12345", realName = "testUser12345", nickname = "testUser12345", server = "irc.freenode.net";
+        /// <summary>
+        /// The user's username for this IRC chat session.
+        /// </summary>
+        public string username = "testUser12345";
+        /// <summary>
+        /// The user's real name for this IRC chat session.
+        /// </summary>
+        public string realName = "testUser12345";
+        /// <summary>
+        /// The user's nickname for this IRC chat session.
+        /// </summary>
+        public string nickname = "testUser12345";
+        /// <summary>
+        /// The user's server to connect to for this IRC chat session.
+        /// </summary>
+        public string server = "irc.freenode.net";
 
         /// <summary>
         /// The constructor for the user info form.
-        /// Sets the username textbox and server textbox keydown events.
+        /// Sets the username textbox and server textbox keydown events, as well as the 
+        /// default dialog results.
         /// </summary>
         public UserInfoForm()
         {

@@ -50,7 +50,7 @@ namespace IRC_Client
         /// <summary>
         /// The current channel that the user is viewing.
         /// </summary>
-        public ChatTab currentChannel;
+        public ChannelTab currentChannel;
 
         /// <summary>
         /// The get data delegate.  Used for whenever data is recieved.
@@ -73,6 +73,10 @@ namespace IRC_Client
         /// </summary>
         public TabControl channelTabs;
 
+        /// <summary>
+        /// This creates a new server tab and sets the data string, data bytes, and requests
+        /// for the user's info, as well as initializes the list of channels.
+        /// </summary>
         public ServerTab()
         {
             InitializeComponent();
@@ -85,7 +89,7 @@ namespace IRC_Client
             // Create the user info form.
             userInfo = new UserInfoForm();
 
-            // Setup the list of tabs.
+            // Setup the list of channels.
             channels = new SortedDictionary<string, UserControl>();
         }
 
@@ -177,7 +181,7 @@ namespace IRC_Client
                     // Create a new tab with the channel name as its text.
                     channelTabs.TabPages.Add(joinChannelForm.channel.ToLower(), joinChannelForm.channel);
                     // Create the new chat tab.
-                    ChatTab newChatTab = new ChatTab();
+                    ChannelTab newChatTab = new ChannelTab();
                     // Set the tab dock style to fill the tab.
                     newChatTab.Dock = DockStyle.Fill;
                     // Set the socket, user info form and join channel form.
@@ -194,7 +198,7 @@ namespace IRC_Client
                     // Add the tab to the list of chennels available.
                     channels.Add(joinChannelForm.channel.ToLower(), newChatTab);
                     // Set the current channel.
-                    currentChannel = (ChatTab)(channels[joinChannelForm.channel.ToLower()]);
+                    currentChannel = (ChannelTab)(channels[joinChannelForm.channel.ToLower()]);
                     // Set the tab name for the channel.
                     channelTabs.TabPages[channelTabs.TabPages.IndexOfKey(joinChannelForm.channel)].Controls.Add(newChatTab);
 
@@ -269,7 +273,7 @@ namespace IRC_Client
                     this.ServerName.Text = userInfo.server = Dns.GetHostEntry(address).HostName;
 
                     // Set the current channel to a new chat tab.
-                    this.currentChannel = new ChatTab();
+                    this.currentChannel = new ChannelTab();
                     // Set the message box for the current channel to the server message box.
                     this.currentChannel.msgRecvBox = this.msgRecvBox;
 
@@ -376,13 +380,13 @@ namespace IRC_Client
                             if (channels.ContainsKey(parameters[0].Split(' ')[0].ToLower().TrimEnd(new char[] { ' ' })))
                             {
                                 // Call the command on the correct channel.
-                                doCommand((ChatTab)channels[parameters[0].Split(' ')[0].ToLower()], actualCommand, parameters);
+                                doCommand((ChannelTab)channels[parameters[0].Split(' ')[0].ToLower()], actualCommand, parameters);
                             }
                             // Check if the chosen final parameter exists.
                             else if (channels.ContainsKey(parameters[parameters.Length - 1].Split(' ')[0].ToLower().TrimEnd(new char[] { ' ' })))
                             {
                                 // Call the command on the correct channel.
-                                doCommand((ChatTab)channels[parameters[parameters.Length - 1].Split(' ')[0].ToLower()], actualCommand, parameters);
+                                doCommand((ChannelTab)channels[parameters[parameters.Length - 1].Split(' ')[0].ToLower()], actualCommand, parameters);
                             }
                             else
                             {
@@ -396,7 +400,7 @@ namespace IRC_Client
         }
 
         /// <summary>
-        /// Handles when data is recieved.
+        /// Handles the data that is recieved.
         /// </summary>
         /// <param name="recieved">The results that were recieved.  Used for getting the original socket.</param>
         private void dataRecieved(IAsyncResult resultsRecieved)
@@ -448,6 +452,10 @@ namespace IRC_Client
             }
         }
 
+        /// <summary>
+        /// Creates a new private chat with a specific user.
+        /// </summary>
+        /// <param name="userName">The user to start a private chat with.</param>
         public void newPrivateChat(string userName)
         {
             // Check if the tab already exists for this private chat.
@@ -456,7 +464,7 @@ namespace IRC_Client
                 // Create a new tab with the channel name as its text.
                 channelTabs.TabPages.Add(userName.ToLower().TrimEnd(new char[] { ' ' }), userName.TrimEnd(new char[] { ' ' }));
                 // Create the new chat tab.
-                ChatTab newChatTab = new ChatTab();
+                ChannelTab newChatTab = new ChannelTab();
                 // Set the tab dock style to fill the tab.
                 newChatTab.Dock = DockStyle.Fill;
                 // Set the socket, user info form and join channel form, but setting the channel to be
@@ -480,7 +488,7 @@ namespace IRC_Client
                 // Add the tab to the list of chennels available.
                 channels.Add(userName.ToLower().TrimEnd(new char[] { ' ' }), newChatTab);
                 // Set the current channel.
-                currentChannel = (ChatTab)(channels[userName.ToLower().TrimEnd(new char[] { ' ' })]);
+                currentChannel = (ChannelTab)(channels[userName.ToLower().TrimEnd(new char[] { ' ' })]);
                 // Set the tab name for the channel.
                 channelTabs.TabPages[channelTabs.TabPages.IndexOfKey(userName.ToLower().TrimEnd(new char[] { ' ' }))].Controls.Add(newChatTab);
 
@@ -495,7 +503,7 @@ namespace IRC_Client
         /// <param name="currentChannel">The channel to perform the command in.</param>
         /// <param name="command">The command to perform.</param>
         /// <param name="parameters">The parameters for the command</param>
-        public void doCommand(ChatTab currentChannel, string command, string[] parameters)
+        public void doCommand(ChannelTab currentChannel, string command, string[] parameters)
         {
             // Check if the command was a ping command.
             if (command.ToUpper().Equals("PING"))
@@ -605,12 +613,12 @@ namespace IRC_Client
             else if (command.Equals("353"))
             {
                 // Create an old tab variable.
-                ChatTab oldTab = currentChannel;
+                ChannelTab oldTab = currentChannel;
                 // Check if the channel is on another tab.
                 if (channels.ContainsKey(parameters[0].Split(' ')[3].ToLower()))
                 {
                     // If so, set the current channel.
-                    currentChannel = (ChatTab)channels[parameters[0].Split(' ')[3].ToLower()];
+                    currentChannel = (ChannelTab)channels[parameters[0].Split(' ')[3].ToLower()];
                 }
 
                 // Clear the old username list.

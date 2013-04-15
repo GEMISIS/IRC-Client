@@ -38,7 +38,7 @@
             this.leaveChannelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currentServer = new IRC_Client.ServerTab();
-            this.chatTabStart = new IRC_Client.ChatTab();
+            this.chatTabStart = new IRC_Client.ChannelTab();
             this.channelTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.MenuBar.SuspendLayout();
@@ -168,7 +168,7 @@
         #endregion
 
         private System.Windows.Forms.TabControl channelTabs;
-        private ChatTab chatTabStart;
+        private ChannelTab chatTabStart;
         private System.Windows.Forms.MenuStrip MenuBar;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeChatToolStripMenuItem;

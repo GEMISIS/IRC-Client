@@ -19,7 +19,13 @@ namespace IRC_Client
         // a user joins a channel, and UserLeft for when a user leaves a channel.
         None, Message, UserJoined, UserLeft
     }
-    public partial class ChatTab : UserControl
+
+    /// <summary>
+    /// Channel tabs are used for creating a tab that connects to a specific channel
+    /// on an IRC server.  They contain a variety of controls for interacting with
+    /// the channel.
+    /// </summary>
+    public partial class ChannelTab : UserControl
     {
         /// <summary>
         /// The server that this tab is under.
@@ -34,67 +40,143 @@ namespace IRC_Client
         /// The form used to join an IRC channel.
         /// </summary>
         public JoinChannelForm joinChannelForm = null;
+
         /// <summary>
         /// The main socket used to transfer data to and from the server.
         /// </summary>
         public Socket mainSocket;
-        public ToolStripMenuItem leaveChannelToolStripMenuItem, allToolStripMenuItem;
 
+        /// <summary>
+        /// The list of channels that can be left.  This is changed when
+        /// another user's name is clicked, as it creates a new private chat
+        /// tab.
+        /// </summary>
+        public ToolStripMenuItem leaveChannelToolStripMenuItem;
+
+        /// <summary>
+        /// This is changed when a channel is left.  It is a button for leaving
+        /// all of the channels on the server.
+        /// </summary>
+        public ToolStripMenuItem allToolStripMenuItem;
+
+        /// <summary>
+        /// The notification for the tab.  This gives information about the tab
+        /// when the user is not on the tab.
+        /// </summary>
         public Chat_Notifications notification = Chat_Notifications.None;
-        private Timer checkConnectionTimer;
-        private Timer pingTimer;
-        private TimeSpan pingTimeSpan;
 
-        public ChatTab()
+        /// <summary>
+        /// A timer used to check the connection strength.  Updates every 5 seconds.
+        /// </summary>
+        private Timer checkConnectionTimer;
+        /// <summary>
+        /// A timer that counts how long it has been since a ping was sent.
+        /// </summary>
+        private Timer pingTimer;
+        /// <summary>
+        /// The time span for how long it has been since a ping was sent.
+        /// </summary>
+        private TimeSpan pingTimeSpan;
+        /// <summary>
+        /// This contains the time of one millisecond.  This
+        /// is added to the ping time span each time the timer ticks.
+        /// </summary>
+        private TimeSpan millisecondSpan = new TimeSpan(0, 0, 0, 0, 1);
+
+        /// <summary>
+        /// The constructor for a channel tab.  Initializes the timers for the tab.
+        /// </summary>
+        public ChannelTab()
         {
             InitializeComponent();
 
+            // Create the ping timer.
             pingTimer = new Timer();
             pingTimer.Interval = 1;
             pingTimer.Tick += new EventHandler(pingTimer_Tick);
 
+            // Create the connection timer.
             checkConnectionTimer = new Timer();
             checkConnectionTimer.Interval = 60 * 1000;
             checkConnectionTimer.Tick += new EventHandler(checkConnectionTimer_Tick);
         }
 
+        /// <summary>
+        /// Used for checking the connection to the server.
+        /// Starts the ping timer and sends a ping message to the server.
+        /// </summary>
+        /// <param name="sender">Not used.</param>
+        /// <param name="e">Not used.</param>
         private void checkConnectionTimer_Tick(object sender, EventArgs e)
         {
+            // Reset the ping time span.
+            pingTimeSpan = new TimeSpan();
+            // Start the ping timer first.
             pingTimer.Start();
+            // Then send a ping to the server.
             mainSocket.Send(Encoding.UTF8.GetBytes("PING " + this.userInfo.server + "\r\n"));
         }
 
-        private TimeSpan milliSpan = new TimeSpan(0, 0, 0, 0, 1);
+        /// <summary>
+        /// Adds one millisecond to the ping time span on each
+        /// pass through.
+        /// </summary>
+        /// <param name="sender">Not used.</param>
+        /// <param name="e">Not used.</param>
         private void pingTimer_Tick(object sender, EventArgs e)
         {
-            pingTimeSpan = pingTimeSpan.Add(milliSpan);
+            // Add the millisecond to the ping time span and set it.
+            pingTimeSpan = pingTimeSpan.Add(millisecondSpan);
         }
 
+        /// <summary>
+        /// Repaints the connection image.  Green indicates good strength, yellow is warning
+        /// level, and red means a bad connection.
+        /// </summary>
+        /// <param name="sender">Not used.</param>
+        /// <param name="e">Used to get the graphics to draw to.</param>
         private void connectionImage_Paint(object sender, PaintEventArgs e)
         {
+            // The current color of the connection.  Set to good by default.
             Color connectionColor = Color.Green;
+
+            // Check if the ping reponse took less than 100ms to receive.
             if (pingTimeSpan.Milliseconds < 100)
             {
+                // If so, that means the user has a good connection.
                 connectionColor = Color.Green;
             }
+            // Check if the ping response took less than 500ms but more than 100ms to receive.
             else if (pingTimeSpan.Milliseconds < 500)
             {
+                // If so, that means the user has an ok connection.
                 connectionColor = Color.Yellow;
             }
             else
             {
+                // Otherwise, the user has a bad connection, so it is set to red.
                 connectionColor = Color.Red;
             }
-            Pen pencil = new Pen(connectionColor);
-            Brush brush = pencil.Brush;
+
+            // Create a pen of that color.
+            Pen pen = new Pen(connectionColor);
+            // Then create a brush from that pen.
+            Brush brush = pen.Brush;
+            // Finally, draw a circle within the image of the color specified by the connection strength.
             e.Graphics.FillEllipse(brush, 0, 0, connectionImage.Size.Width - 1, connectionImage.Size.Height - 1);
         }
 
+        /// <summary>
+        /// Signals that the ping message was recieved.
+        /// </summary>
         public void pingDone()
         {
+            // Checks if the ping timer is enabled.
             if (pingTimer.Enabled)
             {
+                // If so, stop the timer.
                 pingTimer.Stop();
+                // Then refresh the connection image to force it to redraw.
                 connectionImage.Refresh();
             }
         }
@@ -155,19 +237,28 @@ namespace IRC_Client
         {
             try
             {
+                // Create a web request to the link.
                 System.Net.WebRequest request = System.Net.WebRequest.Create(e.LinkText);
+                // Set the timeout to 5 seconds.
                 request.Timeout = 5000;
+
+                // Use a web response and store the response from the server.
                 using (System.Net.WebResponse response = request.GetResponse())
                 {
+                    // Check that there is a response stream.
                     using (response.GetResponseStream())
                     {
+                        // Check if the content type is an image.
                         if (response.ContentType.Contains("image"))
                         {
+                            // If so, create a new image preview form using the image link.
                             ImagePreview prev = new ImagePreview(e.LinkText);
+                            // Then show the new image preview form.
                             prev.Show();
                         }
                         else
                         {
+                            // Otherwise, start the link in the user's default browser. (IE: start it as a process)
                             System.Diagnostics.Process.Start(e.LinkText);
                         }
                     }
@@ -175,23 +266,33 @@ namespace IRC_Client
             }
             catch (Exception)
             {
+                // If there is an exception, then it probably means that the link was not to an image, in
+                // which case the link is opened in the user's default browser.
                 System.Diagnostics.Process.Start(e.LinkText);
             }
         }
 
+        /// <summary>
+        /// Used for when the user selects another user in the user list box.
+        /// </summary>
+        /// <param name="sender">Not used.</param>
+        /// <param name="e">Not used.</param>
         private void userListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Check that the selected index is not -1.
             if (this.userListBox.SelectedIndex > -1)
             {
+                // Start a new private chat with the selected username.
                 server.newPrivateChat(this.userListBox.SelectedItem.ToString());
 
-                // If so, create a new tool strip item.
+                // Create a new tool strip item for the private chat.
                 ToolStripItem newLeaveChannelItem = new ToolStripButton(this.userListBox.SelectedItem.ToString());
                 // Update the click method for the item.
                 newLeaveChannelItem.Click += new EventHandler(newLeaveChannelItem_Click);
                 // Add the item to the leave channel dropdown menu.
                 leaveChannelToolStripMenuItem.DropDownItems.Add(newLeaveChannelItem);
                 
+                // Set the selected index to -1.
                 this.userListBox.SelectedIndex = -1;
             }
         }

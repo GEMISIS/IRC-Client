@@ -21,7 +21,7 @@ namespace IRC_Client
 
         /// <summary>
         /// The constructor for the join channel form.
-        /// Sets the channel textbox keydown event.
+        /// Sets the channel textbox keydown event and the default dialog results.
         /// </summary>
         public JoinChannelForm()
         {

@@ -1,6 +1,6 @@
 ﻿namespace IRC_Client
 {
-    partial class ChatTab
+    partial class ChannelTab
     {
         /// <summary> 
         /// Required designer variable.
