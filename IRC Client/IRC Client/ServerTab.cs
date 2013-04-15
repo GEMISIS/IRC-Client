@@ -453,7 +453,7 @@ namespace IRC_Client
             if (command.ToUpper().Equals("PING"))
             {
                 // Send the pong response as unicode bytes.
-                mainSocket.Send(Encoding.UTF8.GetBytes("PONG :" + parameters + "\r\n"));
+                mainSocket.Send(Encoding.UTF8.GetBytes("PONG :" + parameters[0] + "\r\n"));
             }
             // Check if the command was a pong commands.
             else if (command.ToUpper().Equals("PONG"))
