@@ -256,38 +256,25 @@ namespace IRC_Client
         /// <returns>Returns the newly connected socket.</returns>
         private Socket connectToServer(string serverAdddress, int serverPort)
         {
-            // Get a list of the ip address for the server address.
-            IPHostEntry dnsHostEntry = Dns.GetHostEntry(serverAdddress);
+            TcpClient client = new TcpClient(serverAdddress, serverPort);
 
-            // Loop through all of the address.
-            foreach (IPAddress address in dnsHostEntry.AddressList)
+            // If the socket is connected, return it.
+            if (client.Connected)
             {
-                // Create the IP endpoint to connect to.
-                IPEndPoint ipEndPoint = new IPEndPoint(address, serverPort);
-                // Creates the socket to connect with.
-                Socket socket = new Socket(ipEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                // Set the server name by getting the exact host entry from
+                // the DNS server.
+                this.ServerName.Text = userInfo.server = Dns.GetHostEntry(((IPEndPoint)client.Client.RemoteEndPoint).Address).HostName;
 
-                // Actually connect to the IP endpoint.
-                socket.Connect(ipEndPoint);
+                // Set the current channel to a new chat tab.
+                this.currentChannel = new ChannelTab();
+                // Set the message box for the current channel to the server message box.
+                this.currentChannel.msgRecvBox = this.msgRecvBox;
 
-                // If the socket is connected, return it.
-                if (socket.Connected)
-                {
-                    // Set the server name by getting the exact host entry from
-                    // the DNS server.
-                    this.ServerName.Text = userInfo.server = Dns.GetHostEntry(address).HostName;
+                // Set the first tab's text to the server name.
+                channelTabs.TabPages[0].Text = userInfo.server;
 
-                    // Set the current channel to a new chat tab.
-                    this.currentChannel = new ChannelTab();
-                    // Set the message box for the current channel to the server message box.
-                    this.currentChannel.msgRecvBox = this.msgRecvBox;
-
-                    // Set the first tab's text to the server name.
-                    channelTabs.TabPages[0].Text = userInfo.server;
-
-                    // Return the socket.
-                    return socket;
-                }
+                // Return the socket.
+                return client.Client;
             }
 
             // Return null if the socket couldn't be connected to.
