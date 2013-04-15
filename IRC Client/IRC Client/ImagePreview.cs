@@ -29,8 +29,12 @@ namespace IRC_Client
             WebClient client = new WebClient();
             // Start reading the image stream.
             Stream imageStream = client.OpenRead(this.imageLocation = imageLocation);
+            // Create a temp image.
+            Image temp = Image.FromStream(imageStream);
+            // Set the form size.
+            this.Size = temp.Size;
             // Create the image from the image stream.
-            this.pictureBox.Image = Image.FromStream(imageStream);
+            this.pictureBox.Image = temp;
             // Flush any data leftover in the stream.
             imageStream.Flush();
             // Then close the image stream.

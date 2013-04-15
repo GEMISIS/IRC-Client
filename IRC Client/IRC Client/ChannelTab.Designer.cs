@@ -147,7 +147,7 @@
             this.sendMsgBox.TabIndex = 0;
             this.sendMsgBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sendMsgBox_KeyDown);
             // 
-            // ChatTab
+            // ChannelTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -155,7 +155,7 @@
             this.Controls.Add(this.sendMsgBox);
             this.Controls.Add(this.chatSplitter);
             this.DoubleBuffered = true;
-            this.Name = "ChatTab";
+            this.Name = "ChannelTab";
             this.Size = new System.Drawing.Size(729, 362);
             this.chatSplitter.Panel1.ResumeLayout(false);
             this.chatSplitter.Panel1.PerformLayout();

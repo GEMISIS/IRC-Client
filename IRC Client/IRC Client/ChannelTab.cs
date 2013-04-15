@@ -198,6 +198,81 @@ namespace IRC_Client
                 // Send the actual message.
                 sendMsgButton_Click(null, EventArgs.Empty);
             }
+
+            // Check if the modifier key is the control key.
+            if (e.Modifiers.Equals(Keys.Control))
+            {
+                // Check if the W or L key is also being pressed.
+                if (e.KeyCode.Equals(Keys.W) || e.KeyCode.Equals(Keys.L))
+                {
+                    // If so, set handled to true for the key press.
+                    e.Handled = true;
+                    // Suppress the key press for the control to prevent errors.
+                    e.SuppressKeyPress = true;
+
+                    // Save the current tab index.
+                    int currentTabIndex = this.server.channelTabs.SelectedIndex;
+
+                    // Loop through all of the channels that can be left.
+                    for (int i = 0; i < leaveChannelToolStripMenuItem.DropDownItems.Count; i += 1)
+                    {
+                        // Check if the string equals the current channel name.
+                        if (leaveChannelToolStripMenuItem.DropDownItems[i].Text.Equals(joinChannelForm.channel))
+                        {
+                            // Remove the item from the list of channels to leave.
+                            leaveChannelToolStripMenuItem.DropDownItems.RemoveAt(i);
+                            // Then break out of the loop.
+                            break;
+                        }
+                    }
+                    // Then actually leave the channel.
+                    this.server.leaveCurrentChannel();
+
+                    // Set the current tab to the tab prior to the recently closed one if so.
+                    this.server.channelTabs.SelectedIndex = currentTabIndex - 1;
+
+                    // Check if there is more than one tab (IE: if it has channel tabs).
+                    if (this.server.channelTabs.TabCount > 1)
+                    {
+                        // Enable the leave all channels button if so.
+                        allToolStripMenuItem.Enabled = true;
+                    }
+                    else
+                    {
+                        // Disable the leave all channels button otherwise.
+                        allToolStripMenuItem.Enabled = false;
+                    }
+                }
+                // Check if the J key is also being pressed.
+                if (e.KeyCode.Equals(Keys.J))
+                {
+                    // If so, set handled to true for the key press.
+                    e.Handled = true;
+                    // Suppress the key press for the control to prevent errors.
+                    e.SuppressKeyPress = true;
+
+                    // Check if the user put in valid channel information.
+                    if (this.server.joinChannel())
+                    {
+                        // If so, create a new tool strip item.
+                        ToolStripItem newLeaveChannelItem = new ToolStripButton(this.server.joinChannelForm.channel);
+                        // Update the click method for the item.
+                        newLeaveChannelItem.Click += new EventHandler(newLeaveChannelItem_Click);
+                        // Auto size the text.
+                        newLeaveChannelItem.AutoSize = true;
+                        // Add the item to the leave channel dropdown menu.
+                        leaveChannelToolStripMenuItem.DropDownItems.Add(newLeaveChannelItem);
+
+                        // Set the leave channel tool strip item for the current channel as well as for
+                        // the all tool strip item.
+                        this.server.currentChannel.leaveChannelToolStripMenuItem = leaveChannelToolStripMenuItem;
+                        this.server.currentChannel.allToolStripMenuItem = allToolStripMenuItem;
+
+                        // Enable the leave all channels button.
+                        allToolStripMenuItem.Enabled = true;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -294,6 +369,8 @@ namespace IRC_Client
                 ToolStripItem newLeaveChannelItem = new ToolStripButton(this.userListBox.SelectedItem.ToString());
                 // Update the click method for the item.
                 newLeaveChannelItem.Click += new EventHandler(newLeaveChannelItem_Click);
+                // Auto size the text.
+                newLeaveChannelItem.AutoSize = true;
                 // Add the item to the leave channel dropdown menu.
                 leaveChannelToolStripMenuItem.DropDownItems.Add(newLeaveChannelItem);
                 

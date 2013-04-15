@@ -37,18 +37,19 @@
             // 
             // usernameBox
             // 
-            this.usernameBox.Location = new System.Drawing.Point(154, 8);
+            this.usernameBox.Location = new System.Drawing.Point(149, 14);
             this.usernameBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.usernameBox.Name = "usernameBox";
             this.usernameBox.Size = new System.Drawing.Size(103, 26);
             this.usernameBox.TabIndex = 0;
             this.usernameBox.Text = "testUser12345";
+            this.usernameBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
             this.usernameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameLabel.Location = new System.Drawing.Point(18, 14);
+            this.usernameLabel.Location = new System.Drawing.Point(13, 20);
             this.usernameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.usernameLabel.Name = "usernameLabel";
             this.usernameLabel.Size = new System.Drawing.Size(128, 20);
@@ -57,7 +58,7 @@
             // 
             // continueButton
             // 
-            this.continueButton.Location = new System.Drawing.Point(81, 86);
+            this.continueButton.Location = new System.Drawing.Point(79, 81);
             this.continueButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.continueButton.Name = "continueButton";
             this.continueButton.Size = new System.Drawing.Size(112, 35);
@@ -65,12 +66,13 @@
             this.continueButton.Text = "Continue";
             this.continueButton.UseVisualStyleBackColor = true;
             this.continueButton.Click += new System.EventHandler(this.continueButton_Click);
+            this.continueButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
             // serverLabel
             // 
             this.serverLabel.AutoSize = true;
             this.serverLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.serverLabel.Location = new System.Drawing.Point(18, 45);
+            this.serverLabel.Location = new System.Drawing.Point(13, 51);
             this.serverLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.serverLabel.Name = "serverLabel";
             this.serverLabel.Size = new System.Drawing.Size(105, 20);
@@ -79,27 +81,37 @@
             // 
             // serverBox
             // 
-            this.serverBox.Location = new System.Drawing.Point(131, 39);
+            this.serverBox.Location = new System.Drawing.Point(126, 45);
             this.serverBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.serverBox.Name = "serverBox";
             this.serverBox.Size = new System.Drawing.Size(126, 26);
             this.serverBox.TabIndex = 1;
             this.serverBox.Text = "irc.freenode.net";
+            this.serverBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
-            // userInfoForm
+            // UserInfoForm
             // 
+            this.AcceptButton = this.continueButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(263, 135);
+            this.ControlBox = false;
             this.Controls.Add(this.serverBox);
             this.Controls.Add(this.serverLabel);
             this.Controls.Add(this.continueButton);
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.usernameBox);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "userInfoForm";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "UserInfoForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "User Information";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

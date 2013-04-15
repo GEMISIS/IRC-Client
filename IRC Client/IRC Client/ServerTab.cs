@@ -751,7 +751,19 @@ namespace IRC_Client
             else if (command.ToUpper().Equals("PART") || command.ToUpper().Equals("KILLED") || command.ToUpper().Equals("QUIT"))
             {
                 // If so, print out that the user has quit.
-                currentChannel.msgRecvBox.AppendText(parameters[parameters.Length - 1] + " has quit!\n");
+                currentChannel.msgRecvBox.AppendText(parameters[parameters.Length - 1] + " has quit:");
+
+                // Then loop through all of the paremeters.
+                for (int i = 1; i < parameters.Length - 1; i += 1)
+                {
+                    // Append the message box with the parameter and a colon at the end
+                    // since they are colon separated.
+                    currentChannel.msgRecvBox.AppendText(parameters[i] + ":");
+                }
+                // Trim the ending of any leftover colons.
+                currentChannel.msgRecvBox.Text = currentChannel.msgRecvBox.Text.TrimEnd(new char[] { ':' });
+                // Append a newline to the end of it.
+                currentChannel.msgRecvBox.AppendText("\n");
 
                 // Then remove the user from the user list box.
                 currentChannel.userListBox.Items.Remove(parameters[parameters.Length - 1]);

@@ -59,6 +59,12 @@ namespace IRC_Client
                 // If so, call the continue buttons clicked event.
                 continueButton_Click(null, EventArgs.Empty);
             }
+            // Check for the escape key being pressed.
+            if (e.KeyCode.Equals(Keys.Escape))
+            {
+                // Just close the form if so.
+                this.Close();
+            }
         }
 
         /// <summary>

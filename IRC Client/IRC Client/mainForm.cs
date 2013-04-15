@@ -81,25 +81,29 @@ namespace IRC_Client
             // Check that the selecated tab to draw is a channel tab.
             if (e.Index > 0)
             {
-                // Loop through the notifications for the tab.
-                switch (((ChannelTab)currentServer.channels[channelTabs.TabPages[e.Index].Text.ToLower()]).notification)
+                // Check that the key exists.
+                if (currentServer.channels.ContainsKey(channelTabs.TabPages[e.Index].Text.ToLower()))
                 {
-                    // Set the pen color to blue for a message.
-                    case Chat_Notifications.Message:
-                        pen = new Pen(Color.Blue);
-                        break;
-                    // Set the pen color to green for a user who has joined.
-                    case Chat_Notifications.UserJoined:
-                        pen = new Pen(Color.Green);
-                        break;
-                    // Set the pen color to red for a user who has left.
-                    case Chat_Notifications.UserLeft:
-                        pen = new Pen(Color.Red);
-                        break;
-                    // Set the pen color to black by default.
-                    default:
-                        pen = new Pen(Color.Black);
-                        break;
+                    // Loop through the notifications for the tab.
+                    switch (((ChannelTab)currentServer.channels[channelTabs.TabPages[e.Index].Text.ToLower()]).notification)
+                    {
+                        // Set the pen color to blue for a message.
+                        case Chat_Notifications.Message:
+                            pen = new Pen(Color.Blue);
+                            break;
+                        // Set the pen color to green for a user who has joined.
+                        case Chat_Notifications.UserJoined:
+                            pen = new Pen(Color.Green);
+                            break;
+                        // Set the pen color to red for a user who has left.
+                        case Chat_Notifications.UserLeft:
+                            pen = new Pen(Color.Red);
+                            break;
+                        // Set the pen color to black by default.
+                        default:
+                            pen = new Pen(Color.Black);
+                            break;
+                    }
                 }
             }
 
@@ -123,8 +127,19 @@ namespace IRC_Client
                 // Save the current tab index.
                 int currentTabIndex = channelTabs.SelectedIndex;
 
-                // Remove the channel from the list of channels that can be left.
-                leaveChannelToolStripMenuItem.DropDownItems.RemoveByKey(currentServer.currentChannel.joinChannelForm.channel);
+                // Loop through all of the channels that can be left.
+                for (int i = 0; i < leaveChannelToolStripMenuItem.DropDownItems.Count; i += 1)
+                {
+                    // Check if the string equals the current channel name.
+                    if (leaveChannelToolStripMenuItem.DropDownItems[i].Text.Equals(currentServer.currentChannel.joinChannelForm.channel))
+                    {
+                        // Remove the item from the list of channels to leave.
+                        leaveChannelToolStripMenuItem.DropDownItems.RemoveAt(i);
+                        // Then break out of the loop.
+                        break;
+                    }
+                }
+
                 // Then actually leave the channel.
                 currentServer.leaveCurrentChannel();
 
@@ -150,6 +165,8 @@ namespace IRC_Client
                 ToolStripItem newLeaveChannelItem = new ToolStripButton(currentServer.joinChannelForm.channel);
                 // Update the click method for the item.
                 newLeaveChannelItem.Click += new EventHandler(newLeaveChannelItem_Click);
+                // Auto size the text.
+                newLeaveChannelItem.AutoSize = true;
                 // Add the item to the leave channel dropdown menu.
                 leaveChannelToolStripMenuItem.DropDownItems.Add(newLeaveChannelItem);
 

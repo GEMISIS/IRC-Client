@@ -40,6 +40,7 @@
             this.channelBox.Size = new System.Drawing.Size(174, 20);
             this.channelBox.TabIndex = 0;
             this.channelBox.Text = "#testChannel12345";
+            this.channelBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.channelBox_KeyDown);
             // 
             // joinButton
             // 
@@ -50,6 +51,7 @@
             this.joinButton.Text = "Join";
             this.joinButton.UseVisualStyleBackColor = true;
             this.joinButton.Click += new System.EventHandler(this.joinButton_Click);
+            this.joinButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.channelBox_KeyDown);
             // 
             // channelLabel
             // 
@@ -61,16 +63,22 @@
             this.channelLabel.TabIndex = 2;
             this.channelLabel.Text = "Channel Name";
             // 
-            // joinChannelForm
+            // JoinChannelForm
             // 
+            this.AcceptButton = this.joinButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(198, 92);
+            this.ControlBox = false;
             this.Controls.Add(this.channelLabel);
             this.Controls.Add(this.joinButton);
             this.Controls.Add(this.channelBox);
-            this.Name = "joinChannelForm";
-            this.Text = "Channel";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Name = "JoinChannelForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "Join Channel";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.channelBox_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

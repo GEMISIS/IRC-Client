@@ -30,7 +30,6 @@
         {
             this.channelTabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.currentServer = new IRC_Client.ServerTab();
             this.MenuBar = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,6 +37,7 @@
             this.joinChannelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leaveChannelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentServer = new IRC_Client.ServerTab();
             this.chatTabStart = new IRC_Client.ChannelTab();
             this.channelTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -69,16 +69,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Server";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // currentServer
-            // 
-            this.currentServer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.currentServer.Location = new System.Drawing.Point(7, 7);
-            this.currentServer.Name = "currentServer";
-            this.currentServer.Size = new System.Drawing.Size(699, 380);
-            this.currentServer.TabIndex = 0;
             // 
             // MenuBar
             // 
@@ -135,9 +125,21 @@
             // 
             this.allToolStripMenuItem.Enabled = false;
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(88, 22);
+            this.allToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt)
+                        | System.Windows.Forms.Keys.L)));
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.allToolStripMenuItem.Text = "All";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
+            // 
+            // currentServer
+            // 
+            this.currentServer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.currentServer.Location = new System.Drawing.Point(7, 7);
+            this.currentServer.Name = "currentServer";
+            this.currentServer.Size = new System.Drawing.Size(699, 380);
+            this.currentServer.TabIndex = 0;
             // 
             // chatTabStart
             // 
@@ -157,6 +159,7 @@
             this.MainMenuStrip = this.MenuBar;
             this.Name = "mainForm";
             this.Text = "IRC Client";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
             this.channelTabs.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.MenuBar.ResumeLayout(false);
