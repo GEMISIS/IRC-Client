@@ -77,11 +77,11 @@
     <Compile Include="ImagePreview.Designer.cs">
       <DependentUpon>ImagePreview.cs</DependentUpon>
     </Compile>
-    <Compile Include="joinChannelForm.cs">
+    <Compile Include="JoinChannelForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="joinChannelForm.Designer.cs">
-      <DependentUpon>joinChannelForm.cs</DependentUpon>
+    <Compile Include="JoinChannelForm.Designer.cs">
+      <DependentUpon>JoinChannelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="mainForm.cs">
       <SubType>Form</SubType>
@@ -91,11 +91,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="userInfoForm.cs">
+    <Compile Include="ServerTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ServerTab.Designer.cs">
+      <DependentUpon>ServerTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="userInfoForm.Designer.cs">
-      <DependentUpon>userInfoForm.cs</DependentUpon>
+    <Compile Include="UserInfoForm.Designer.cs">
+      <DependentUpon>UserInfoForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="ChatTab.resx">
       <DependentUpon>ChatTab.cs</DependentUpon>
@@ -103,8 +109,8 @@
     <EmbeddedResource Include="ImagePreview.resx">
       <DependentUpon>ImagePreview.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="joinChannelForm.resx">
-      <DependentUpon>joinChannelForm.cs</DependentUpon>
+    <EmbeddedResource Include="JoinChannelForm.resx">
+      <DependentUpon>JoinChannelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mainForm.resx">
       <DependentUpon>mainForm.cs</DependentUpon>
@@ -119,8 +125,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="userInfoForm.resx">
-      <DependentUpon>userInfoForm.cs</DependentUpon>
+    <EmbeddedResource Include="ServerTab.resx">
+      <DependentUpon>ServerTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInfoForm.resx">
+      <DependentUpon>UserInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

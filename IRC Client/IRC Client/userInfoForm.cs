@@ -7,7 +7,7 @@ namespace IRC_Client
     /// This a a form for the user's information.  This will ask for
     /// the user's username, the irc server to connect to, and the user's nickname.
     /// </summary>
-    public partial class userInfoForm : Form
+    public partial class UserInfoForm : Form
     {
         // The username and server for this IRC chat session.
         public string username = "testUser12345", realName = "testUser12345", nickname = "testUser12345", server = "irc.freenode.net";
@@ -16,9 +16,12 @@ namespace IRC_Client
         /// The constructor for the user info form.
         /// Sets the username textbox and server textbox keydown events.
         /// </summary>
-        public userInfoForm()
+        public UserInfoForm()
         {
             InitializeComponent();
+
+            // Set the results of the dialog to cancel by default.
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 
             // The username text box's key down function.
             usernameBox.KeyDown += new KeyEventHandler(textBox_KeyDown);
@@ -56,6 +59,8 @@ namespace IRC_Client
             nickname = realName = username = usernameBox.Text;
             // Set the server variable.
             server = serverBox.Text;
+            // Set the dialog results to ok.
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
             // Close the form.
             this.Close();
         }

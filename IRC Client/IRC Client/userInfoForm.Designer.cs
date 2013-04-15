@@ -1,6 +1,6 @@
 ﻿namespace IRC_Client
 {
-    partial class userInfoForm
+    partial class UserInfoForm
     {
         /// <summary>
         /// Required designer variable.

@@ -47,7 +47,7 @@
             this.chatSplitter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.chatSplitter.Location = new System.Drawing.Point(-58, -1);
+            this.chatSplitter.Location = new System.Drawing.Point(0, 0);
             this.chatSplitter.Name = "chatSplitter";
             // 
             // chatSplitter.Panel1
@@ -59,16 +59,16 @@
             // chatSplitter.Panel2
             // 
             this.chatSplitter.Panel2.Controls.Add(this.userListBox);
-            this.chatSplitter.Size = new System.Drawing.Size(776, 330);
-            this.chatSplitter.SplitterDistance = 545;
+            this.chatSplitter.Size = new System.Drawing.Size(729, 334);
+            this.chatSplitter.SplitterDistance = 511;
             this.chatSplitter.TabIndex = 6;
             // 
             // connectionImage
             // 
             this.connectionImage.Enabled = false;
-            this.connectionImage.Location = new System.Drawing.Point(515, 6);
+            this.connectionImage.Location = new System.Drawing.Point(484, 3);
             this.connectionImage.Name = "connectionImage";
-            this.connectionImage.Size = new System.Drawing.Size(27, 28);
+            this.connectionImage.Size = new System.Drawing.Size(24, 24);
             this.connectionImage.TabIndex = 4;
             this.connectionImage.TabStop = false;
             this.connectionImage.Visible = false;
@@ -82,7 +82,7 @@
             this.ChannelTopic.AutoSize = true;
             this.ChannelTopic.Font = new System.Drawing.Font("DejaVu Sans Mono", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChannelTopic.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ChannelTopic.Location = new System.Drawing.Point(61, 15);
+            this.ChannelTopic.Location = new System.Drawing.Point(3, 6);
             this.ChannelTopic.Name = "ChannelTopic";
             this.ChannelTopic.Size = new System.Drawing.Size(152, 18);
             this.ChannelTopic.TabIndex = 3;
@@ -96,10 +96,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.msgRecvBox.BackColor = System.Drawing.Color.White;
             this.msgRecvBox.Font = new System.Drawing.Font("DejaVu Sans Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.msgRecvBox.Location = new System.Drawing.Point(61, 37);
+            this.msgRecvBox.Location = new System.Drawing.Point(3, 26);
             this.msgRecvBox.Name = "msgRecvBox";
             this.msgRecvBox.ReadOnly = true;
-            this.msgRecvBox.Size = new System.Drawing.Size(481, 294);
+            this.msgRecvBox.Size = new System.Drawing.Size(505, 304);
             this.msgRecvBox.TabIndex = 2;
             this.msgRecvBox.TabStop = false;
             this.msgRecvBox.Text = "";
@@ -114,10 +114,10 @@
             this.userListBox.FormattingEnabled = true;
             this.userListBox.ItemHeight = 19;
             this.userListBox.Items.AddRange(new object[] {
-            "UserList"});
-            this.userListBox.Location = new System.Drawing.Point(4, 23);
+            "User List"});
+            this.userListBox.Location = new System.Drawing.Point(3, 3);
             this.userListBox.Name = "userListBox";
-            this.userListBox.Size = new System.Drawing.Size(223, 308);
+            this.userListBox.Size = new System.Drawing.Size(208, 327);
             this.userListBox.Sorted = true;
             this.userListBox.TabIndex = 4;
             // 
@@ -125,7 +125,7 @@
             // 
             this.sendMsgButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.sendMsgButton.Font = new System.Drawing.Font("DejaVu Sans Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendMsgButton.Location = new System.Drawing.Point(654, 332);
+            this.sendMsgButton.Location = new System.Drawing.Point(665, 336);
             this.sendMsgButton.Name = "sendMsgButton";
             this.sendMsgButton.Size = new System.Drawing.Size(61, 23);
             this.sendMsgButton.TabIndex = 1;
@@ -138,9 +138,9 @@
             this.sendMsgBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.sendMsgBox.Font = new System.Drawing.Font("DejaVu Sans Mono", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendMsgBox.Location = new System.Drawing.Point(3, 332);
+            this.sendMsgBox.Location = new System.Drawing.Point(3, 336);
             this.sendMsgBox.Name = "sendMsgBox";
-            this.sendMsgBox.Size = new System.Drawing.Size(645, 23);
+            this.sendMsgBox.Size = new System.Drawing.Size(656, 23);
             this.sendMsgBox.TabIndex = 0;
             this.sendMsgBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.sendMsgBox_DragDrop);
             this.sendMsgBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sendMsgBox_KeyDown);
@@ -154,7 +154,7 @@
             this.Controls.Add(this.chatSplitter);
             this.DoubleBuffered = true;
             this.Name = "ChatTab";
-            this.Size = new System.Drawing.Size(729, 358);
+            this.Size = new System.Drawing.Size(729, 362);
             this.chatSplitter.Panel1.ResumeLayout(false);
             this.chatSplitter.Panel1.PerformLayout();
             this.chatSplitter.Panel2.ResumeLayout(false);

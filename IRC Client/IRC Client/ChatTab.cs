@@ -10,8 +10,13 @@ using System.Net.Sockets;
 
 namespace IRC_Client
 {
+    /// <summary>
+    /// Used for notifications about the channel.
+    /// </summary>
     public enum Chat_Notifications
     {
+        // None for no message, Message for a message from a channel, UserJoined for when
+        // a user joins a channel, and UserLeft for when a user leaves a channel.
         None, Message, UserJoined, UserLeft
     }
     public partial class ChatTab : UserControl
@@ -20,11 +25,11 @@ namespace IRC_Client
         /// The form used to get information about the user
         /// for connecting. (Username, IRC, etc.)
         /// </summary>
-        public userInfoForm userInfo;
+        public UserInfoForm userInfo;
         /// <summary>
         /// The form used to join an IRC channel.
         /// </summary>
-        public joinChannelForm joinChannel = null;
+        public JoinChannelForm joinChannelForm = null;
         /// <summary>
         /// The main socket used to transfer data to and from the server.
         /// </summary>
@@ -120,7 +125,7 @@ namespace IRC_Client
             else
             {
                 // If not, send it to the current channel.
-                mainSocket.Send(Encoding.UTF8.GetBytes("PRIVMSG " + joinChannel.channel + " :" + sendMsgBox.Text + "\r\n"));
+                mainSocket.Send(Encoding.UTF8.GetBytes("PRIVMSG " + joinChannelForm.channel + " :" + sendMsgBox.Text + "\r\n"));
             }
 
             // Post the message on the user's message text box.

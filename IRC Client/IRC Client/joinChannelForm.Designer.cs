@@ -1,6 +1,6 @@
 ﻿namespace IRC_Client
 {
-    partial class joinChannelForm
+    partial class JoinChannelForm
     {
         /// <summary>
         /// Required designer variable.

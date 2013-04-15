@@ -12,7 +12,7 @@ namespace IRC_Client
     /// <summary>
     /// Prompts the user for an irc channel to join.
     /// </summary>
-    public partial class joinChannelForm : Form
+    public partial class JoinChannelForm : Form
     {
         /// <summary>
         /// The irc channel to join.
@@ -23,11 +23,11 @@ namespace IRC_Client
         /// The constructor for the join channel form.
         /// Sets the channel textbox keydown event.
         /// </summary>
-        public joinChannelForm()
+        public JoinChannelForm()
         {
             InitializeComponent();
 
-            // Set the results of the dialog to cancle by default.
+            // Set the results of the dialog to cancel by default.
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 
             // Set the channel text box keydown event.
