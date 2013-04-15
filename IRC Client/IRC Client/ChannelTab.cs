@@ -188,9 +188,14 @@ namespace IRC_Client
         /// <param name="e">The key event arguments used to get the keys pressed.</param>
         private void sendMsgBox_KeyDown(object sender, KeyEventArgs e)
         {
-            // If the enter key is being pressed, send the message.
+            // Check if the enter key is being pressed.
             if (e.KeyData.Equals(Keys.Enter))
             {
+                // If so, set handled to true for the key press.
+                e.Handled = true;
+                // Suppress the key press for the control to prevent errors.
+                e.SuppressKeyPress = true;
+                // Send the actual message.
                 sendMsgButton_Click(null, EventArgs.Empty);
             }
         }
