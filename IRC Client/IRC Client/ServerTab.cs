@@ -53,6 +53,11 @@ namespace IRC_Client
         public ChannelTab currentChannel;
 
         /// <summary>
+        /// The join channel menu item.  Must be enabled once the server is joined.
+        /// </summary>
+        public ToolStripMenuItem joinChannelToolStripMenuItem;
+
+        /// <summary>
         /// The get data delegate.  Used for whenever data is recieved.
         /// </summary>
         /// <param name="receivedData">The data recieved from the server.</param>
@@ -352,6 +357,7 @@ namespace IRC_Client
                     // Check that the servername doesn't contain the user's name.
                     else if (!servername.Split(new char[] { '!', '@' })[0].Equals(userInfo.username))
                     {
+                        string s = servername.Split(new char[] { '!', '@' })[0];
                         // Get the substring of the command after the servername.
                         command = command.Substring(servername.Length + 1);
 
@@ -361,7 +367,7 @@ namespace IRC_Client
                         // Check that the actual command is either a private message, a user joining, or quitting.
                         if (actualCommand.ToUpper().Equals("PRIVMSG") || actualCommand.ToUpper().Equals("JOIN")
                             || actualCommand.ToUpper().Equals("PART") || actualCommand.ToUpper().Equals("KILLED")
-                            || actualCommand.ToUpper().Equals("QUIT"))
+                            || actualCommand.ToUpper().Equals("QUIT") || actualCommand.ToUpper().Equals("NICK"))
                         {
                             // Go to the parameters after the command.
                             command = command.Substring(actualCommand.Length);
@@ -556,10 +562,6 @@ namespace IRC_Client
             // Check if command is 376, whichs signals the end of the motd command.
             else if (command.Equals("376"))
             {
-                // Enable the join channel toolstrip item.
-                //joinChannelFormToolStripMenuItem.Enabled = true;
-                // Enable the connection image.
-                currentChannel.connectionImage.Enabled = true;
 #if DEBUG
                 // Print out the command if debugging.
                 currentChannel.msgRecvBox.AppendText(command + "\n");
@@ -590,6 +592,11 @@ namespace IRC_Client
                 command.Equals("266") || command.Equals("372") ||
                 command.Equals("375"))
             {
+                // Enable the join channel toolstrip item.
+                joinChannelToolStripMenuItem.Enabled = true;
+                // Enable the connection image.
+                currentChannel.connectionImage.Enabled = true;
+
                 // Loop through all of the parameters after the first one.
                 for (int i = 1; i < parameters.Length; i += 1)
                 {
@@ -687,6 +694,19 @@ namespace IRC_Client
                 currentChannel.connectionImage.Enabled = true;
                 // Set the current channel back to it's original channel.
                 currentChannel = oldTab;
+            }
+            // Check if the command is a nickname change (denoted by having NICK).
+            else if (command.ToUpper().Equals("NICK"))
+            {
+                for(int i = 0;i < currentChannel.userListBox.Items.Count;i += 1)
+                {
+                    if (currentChannel.userListBox.Items[i].Equals(parameters[parameters.Length - 1]))
+                    {
+                        currentChannel.userListBox.Items[i] = parameters[0];
+                        currentChannel.msgRecvBox.AppendText(parameters[parameters.Length - 1] + " has changed their nickname to " + parameters[0] + "!\n");
+                        break;
+                    }
+                }
             }
             // Check if the command is a message (denoted by having PRIVMSG).
             else if (command.ToUpper().Equals("PRIVMSG"))

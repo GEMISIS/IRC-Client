@@ -30,6 +30,7 @@
         {
             this.channelTabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.currentServer = new IRC_Client.ServerTab();
             this.MenuBar = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,7 +38,6 @@
             this.joinChannelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leaveChannelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentServer = new IRC_Client.ServerTab();
             this.chatTabStart = new IRC_Client.ChannelTab();
             this.channelTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -69,6 +69,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Server";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // currentServer
+            // 
+            this.currentServer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.currentServer.Location = new System.Drawing.Point(7, 7);
+            this.currentServer.Name = "currentServer";
+            this.currentServer.Size = new System.Drawing.Size(699, 380);
+            this.currentServer.TabIndex = 0;
             // 
             // MenuBar
             // 
@@ -107,8 +117,9 @@
             // 
             // joinChannelToolStripMenuItem
             // 
+            this.joinChannelToolStripMenuItem.Enabled = false;
             this.joinChannelToolStripMenuItem.Name = "joinChannelToolStripMenuItem";
-            this.joinChannelToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.joinChannelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.joinChannelToolStripMenuItem.Text = "Join Channel";
             this.joinChannelToolStripMenuItem.Click += new System.EventHandler(this.joinChannelFormToolStripMenuItem_Click);
             // 
@@ -117,7 +128,7 @@
             this.leaveChannelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allToolStripMenuItem});
             this.leaveChannelToolStripMenuItem.Name = "leaveChannelToolStripMenuItem";
-            this.leaveChannelToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.leaveChannelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.leaveChannelToolStripMenuItem.Text = "Leave Channel";
             // 
             // allToolStripMenuItem
@@ -127,16 +138,6 @@
             this.allToolStripMenuItem.Size = new System.Drawing.Size(88, 22);
             this.allToolStripMenuItem.Text = "All";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
-            // 
-            // currentServer
-            // 
-            this.currentServer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.currentServer.Location = new System.Drawing.Point(7, 7);
-            this.currentServer.Name = "currentServer";
-            this.currentServer.Size = new System.Drawing.Size(699, 380);
-            this.currentServer.TabIndex = 0;
             // 
             // chatTabStart
             // 

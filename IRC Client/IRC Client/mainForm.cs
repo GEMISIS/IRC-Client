@@ -20,6 +20,8 @@ namespace IRC_Client
         {
             InitializeComponent();
 
+            // Set the join channel menu item for the current server.
+            this.currentServer.joinChannelToolStripMenuItem = joinChannelToolStripMenuItem;
             // Initialize the current server with the current channel tabs.
             this.currentServer.Initialize(this.channelTabs);
 
