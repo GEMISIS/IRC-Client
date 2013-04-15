@@ -266,7 +266,7 @@ namespace IRC_Client
                 {
                     // Set the server name by getting the exact host entry from
                     // the DNS server.
-                    userInfo.server = Dns.GetHostEntry(address).HostName;
+                    this.ServerName.Text = userInfo.server = Dns.GetHostEntry(address).HostName;
 
                     // Set the current channel to a new chat tab.
                     this.currentChannel = new ChatTab();

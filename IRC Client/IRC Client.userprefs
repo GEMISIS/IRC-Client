@@ -1,0 +1,25 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="IRC Client\ServerTab.Designer.cs">
+    <Files>
+      <File FileName="IRC Client\ServerTab.Designer.cs" Line="37" Column="1" />
+      <File FileName="IRC Client\ChatTab.Designer.cs" Line="40" Column="19" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="IRC Client" expanded="True">
+            <Node name="ChatTab.cs" expanded="True" />
+            <Node name="ServerTab.cs" expanded="True">
+              <Node name="ServerTab.Designer.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -82,7 +82,7 @@
             this.ChannelTopic.AutoSize = true;
             this.ChannelTopic.Font = new System.Drawing.Font("DejaVu Sans Mono", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChannelTopic.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ChannelTopic.Location = new System.Drawing.Point(3, 6);
+            this.ChannelTopic.Location = new System.Drawing.Point(3, 3);
             this.ChannelTopic.Name = "ChannelTopic";
             this.ChannelTopic.Size = new System.Drawing.Size(152, 18);
             this.ChannelTopic.TabIndex = 3;

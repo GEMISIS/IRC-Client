@@ -79,11 +79,11 @@
             this.ServerName.AutoSize = true;
             this.ServerName.Font = new System.Drawing.Font("DejaVu Sans Mono", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServerName.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ServerName.Location = new System.Drawing.Point(3, 6);
+            this.ServerName.Location = new System.Drawing.Point(3, 3);
             this.ServerName.Name = "ServerName";
-            this.ServerName.Size = new System.Drawing.Size(152, 18);
+            this.ServerName.Size = new System.Drawing.Size(179, 18);
             this.ServerName.TabIndex = 3;
-            this.ServerName.Text = "No Channel Topic";
+            this.ServerName.Text = "No Server Connected";
             this.ServerName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // msgRecvBox

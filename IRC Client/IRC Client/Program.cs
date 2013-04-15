@@ -13,8 +13,10 @@ namespace IRC_Client
         [STAThread]
         static void Main()
         {
+#if !MONO
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+#endif
             Application.Run(new mainForm());
         }
     }
