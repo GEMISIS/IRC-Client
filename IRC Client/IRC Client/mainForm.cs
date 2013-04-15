@@ -151,6 +151,11 @@ namespace IRC_Client
                 // Add the item to the leave channel dropdown menu.
                 leaveChannelToolStripMenuItem.DropDownItems.Add(newLeaveChannelItem);
 
+                // Set the leave channel tool strip item for the current channel as well as for
+                // the all tool strip item.
+                currentServer.currentChannel.leaveChannelToolStripMenuItem = leaveChannelToolStripMenuItem;
+                currentServer.currentChannel.allToolStripMenuItem = allToolStripMenuItem;
+
                 // Enable the leave all channels button.
                 allToolStripMenuItem.Enabled = true;
             }

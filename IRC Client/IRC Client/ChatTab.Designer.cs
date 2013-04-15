@@ -60,7 +60,7 @@
             // 
             this.chatSplitter.Panel2.Controls.Add(this.userListBox);
             this.chatSplitter.Size = new System.Drawing.Size(729, 334);
-            this.chatSplitter.SplitterDistance = 511;
+            this.chatSplitter.SplitterDistance = 510;
             this.chatSplitter.TabIndex = 6;
             // 
             // connectionImage
@@ -99,7 +99,7 @@
             this.msgRecvBox.Location = new System.Drawing.Point(3, 26);
             this.msgRecvBox.Name = "msgRecvBox";
             this.msgRecvBox.ReadOnly = true;
-            this.msgRecvBox.Size = new System.Drawing.Size(505, 304);
+            this.msgRecvBox.Size = new System.Drawing.Size(504, 304);
             this.msgRecvBox.TabIndex = 2;
             this.msgRecvBox.TabStop = false;
             this.msgRecvBox.Text = "";
@@ -117,9 +117,10 @@
             "User List"});
             this.userListBox.Location = new System.Drawing.Point(3, 3);
             this.userListBox.Name = "userListBox";
-            this.userListBox.Size = new System.Drawing.Size(208, 327);
+            this.userListBox.Size = new System.Drawing.Size(209, 327);
             this.userListBox.Sorted = true;
             this.userListBox.TabIndex = 4;
+            this.userListBox.SelectedIndexChanged += new System.EventHandler(this.userListBox_SelectedIndexChanged);
             // 
             // sendMsgButton
             // 
@@ -142,7 +143,6 @@
             this.sendMsgBox.Name = "sendMsgBox";
             this.sendMsgBox.Size = new System.Drawing.Size(656, 23);
             this.sendMsgBox.TabIndex = 0;
-            this.sendMsgBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.sendMsgBox_DragDrop);
             this.sendMsgBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sendMsgBox_KeyDown);
             // 
             // ChatTab

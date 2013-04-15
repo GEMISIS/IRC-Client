@@ -184,6 +184,7 @@ namespace IRC_Client
                     newChatTab.joinChannelForm = joinChannelForm;
                     newChatTab.userInfo = userInfo;
                     newChatTab.mainSocket = mainSocket;
+                    newChatTab.server = this;
                     // Clear the message recieved text box.
                     newChatTab.msgRecvBox.Text = "";
 
@@ -372,10 +373,16 @@ namespace IRC_Client
                             string[] parameters = command.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
 
                             // Check if the chosen channel exists.
-                            if (channels.ContainsKey(parameters[0].Split(' ')[0].ToLower()))
+                            if (channels.ContainsKey(parameters[0].Split(' ')[0].ToLower().TrimEnd(new char[] { ' ' })))
                             {
                                 // Call the command on the correct channel.
                                 doCommand((ChatTab)channels[parameters[0].Split(' ')[0].ToLower()], actualCommand, parameters);
+                            }
+                            // Check if the chosen final parameter exists.
+                            else if (channels.ContainsKey(parameters[parameters.Length - 1].Split(' ')[0].ToLower().TrimEnd(new char[] { ' ' })))
+                            {
+                                // Call the command on the correct channel.
+                                doCommand((ChatTab)channels[parameters[parameters.Length - 1].Split(' ')[0].ToLower()], actualCommand, parameters);
                             }
                             else
                             {
@@ -438,6 +445,47 @@ namespace IRC_Client
 #else
                 MessageBox.Show(this, ex.Message, "Unusual error druing Recieve!");
 #endif
+            }
+        }
+
+        public void newPrivateChat(string userName)
+        {
+            // Check if the tab already exists for this private chat.
+            if (!channelTabs.TabPages.ContainsKey(userName.ToLower().TrimEnd(new char[] { ' ' })))
+            {
+                // Create a new tab with the channel name as its text.
+                channelTabs.TabPages.Add(userName.ToLower().TrimEnd(new char[] { ' ' }), userName.TrimEnd(new char[] { ' ' }));
+                // Create the new chat tab.
+                ChatTab newChatTab = new ChatTab();
+                // Set the tab dock style to fill the tab.
+                newChatTab.Dock = DockStyle.Fill;
+                // Set the socket, user info form and join channel form, but setting the channel to be
+                // the other users' name.
+                newChatTab.joinChannelForm = new JoinChannelForm();
+                newChatTab.joinChannelForm.channel = userName.TrimEnd(new char[] { ' ' });
+                newChatTab.userInfo = userInfo;
+                newChatTab.mainSocket = mainSocket;
+                // Set the new tab's server.
+                newChatTab.server = this;
+                // Clear the new tab's user list box.
+                newChatTab.userListBox.Items.Clear();
+                // Add the other user from the private chat to the user list box.
+                newChatTab.userListBox.Items.Add(userName);
+                // Clear the message recieved text box.
+                newChatTab.msgRecvBox.Text = "";
+
+                // Focus on the send message text box.
+                newChatTab.sendMsgBox.Focus();
+
+                // Add the tab to the list of chennels available.
+                channels.Add(userName.ToLower().TrimEnd(new char[] { ' ' }), newChatTab);
+                // Set the current channel.
+                currentChannel = (ChatTab)(channels[userName.ToLower().TrimEnd(new char[] { ' ' })]);
+                // Set the tab name for the channel.
+                channelTabs.TabPages[channelTabs.TabPages.IndexOfKey(userName.ToLower().TrimEnd(new char[] { ' ' }))].Controls.Add(newChatTab);
+
+                // Select the newly created channel.
+                channelTabs.SelectTab(userName.ToLower().TrimEnd(new char[] { ' ' }));
             }
         }
 
@@ -569,8 +617,6 @@ namespace IRC_Client
                 currentChannel.userListBox.Items.Clear();
                 // Split the list of users in the room.
                 string[] userList = parameters[1].Split(' ');
-                // Add the channel to the list of available chats.
-                currentChannel.userListBox.Items.Add(currentChannel.joinChannelForm.channel);
                 // Now loop through the list of users.
                 foreach (string username in userList)
                 {
@@ -638,7 +684,8 @@ namespace IRC_Client
             else if (command.ToUpper().Equals("PRIVMSG"))
             {
                 // Then check if the command contains the channel name.
-                if (parameters[0].ToLower().Contains(currentChannel.joinChannelForm.channel.ToLower()))
+                if (parameters[0].ToLower().Contains(currentChannel.joinChannelForm.channel.ToLower()) ||
+                    parameters[parameters.Length - 1].ToLower().Contains(currentChannel.joinChannelForm.channel.ToLower()))
                 {
                     // If so, filter out the username of whoever sent it, and
                     // display the response in the message recieved text box.
@@ -663,11 +710,12 @@ namespace IRC_Client
                         currentChannel.notification = Chat_Notifications.Message;
                     }
                 }
-                // If not, then it was a private messgae most like.
+                // If not, then it was a private messgae most likely.
                 else
                 {
-                    // Display that it is a private message.
-                    currentChannel.msgRecvBox.AppendText("Private Message from ");
+                    // Create a new private chat.
+                    newPrivateChat(parameters[parameters.Length - 1]);
+
                     // Display the user the message is from.
                     currentChannel.msgRecvBox.AppendText(parameters[parameters.Length - 1] + ": ");
 
@@ -688,10 +736,10 @@ namespace IRC_Client
             else if (command.ToUpper().Equals("PART") || command.ToUpper().Equals("KILLED") || command.ToUpper().Equals("QUIT"))
             {
                 // If so, print out that the user has quit.
-                currentChannel.msgRecvBox.AppendText(parameters[1] + " has quit!\n");
+                currentChannel.msgRecvBox.AppendText(parameters[parameters.Length - 1] + " has quit!\n");
 
                 // Then remove the user from the user list box.
-                currentChannel.userListBox.Items.Remove(parameters[1]);
+                currentChannel.userListBox.Items.Remove(parameters[parameters.Length - 1]);
 
                 // Check if the selected tab is the one that received the message.
                 if (!currentChannel.joinChannelForm.channel.ToLower().Equals(channelTabs.SelectedTab.Text.ToLower()))
@@ -704,13 +752,13 @@ namespace IRC_Client
             else if (command.ToUpper().Equals("JOIN"))
             {
                 // If so, print out that the user has joined.
-                currentChannel.msgRecvBox.AppendText(parameters[1] + " has joined!\n");
+                currentChannel.msgRecvBox.AppendText(parameters[parameters.Length - 1] + " has joined!\n");
 
                 // Check that the user is not already in the list.
-                if (!currentChannel.userListBox.Items.Contains(parameters[1]))
+                if (!currentChannel.userListBox.Items.Contains(parameters[parameters.Length - 1]))
                 {
                     // Then add the user to the user list box.
-                    currentChannel.userListBox.Items.Add(parameters[1]);
+                    currentChannel.userListBox.Items.Add(parameters[parameters.Length - 1]);
                 }
 
                 // Check if the selected tab is the one that received the message.
