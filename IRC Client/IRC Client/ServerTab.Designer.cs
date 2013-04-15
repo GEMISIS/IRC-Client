@@ -33,7 +33,9 @@
             this.ServerName = new System.Windows.Forms.Label();
             this.msgRecvBox = new System.Windows.Forms.RichTextBox();
             this.serverListBox = new System.Windows.Forms.ListBox();
+#if !MONO
             ((System.ComponentModel.ISupportInitialize)(this.chatSplitter)).BeginInit();
+#endif 
             this.chatSplitter.Panel1.SuspendLayout();
             this.chatSplitter.Panel2.SuspendLayout();
             this.chatSplitter.SuspendLayout();
@@ -127,7 +129,9 @@
             this.chatSplitter.Panel1.ResumeLayout(false);
             this.chatSplitter.Panel1.PerformLayout();
             this.chatSplitter.Panel2.ResumeLayout(false);
+#if !MONO
             ((System.ComponentModel.ISupportInitialize)(this.chatSplitter)).EndInit();
+#endif
             this.chatSplitter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.connectionImage)).EndInit();
             this.ResumeLayout(false);
